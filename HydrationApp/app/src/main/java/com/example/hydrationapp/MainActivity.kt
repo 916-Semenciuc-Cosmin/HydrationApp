@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //this is for starting the settings activity when the
+        // settings button on the top bar is clicked
         when (item.itemId) {
             R.id.settings -> {
                 val intent = Intent(this, Settings::class.java)

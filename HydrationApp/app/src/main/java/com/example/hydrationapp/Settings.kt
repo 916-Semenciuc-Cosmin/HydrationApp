@@ -29,6 +29,8 @@ class Settings : AppCompatActivity() {
     }
 
     override fun onRestart() {
+        //here i call the things from onCreate method to update the
+        // screen when i come back from changing any settings
         super.onRestart()
 
         get_settings()
@@ -37,6 +39,7 @@ class Settings : AppCompatActivity() {
 
     fun get_settings()
     {
+        //here i get the current settings from the database
         val database = Database(this)
         database.set_default_settings()
         val cursor = database.get_settings()
@@ -54,6 +57,7 @@ class Settings : AppCompatActivity() {
 
     fun set_variables()
     {
+        //here i set all the view on the screen that are related to the settings
         val goal_tv = findViewById<TextView>(R.id.goal)
         val str_goal = goal.toString()
         goal_tv.text = str_goal
@@ -88,6 +92,7 @@ class Settings : AppCompatActivity() {
 
     fun set_actions()
     {
+        //here i set the actions for clicking the views
         val units_layout = findViewById<RelativeLayout>(R.id.units_layout)
         val goal_layout = findViewById<RelativeLayout>(R.id.goal_layout)
         val c1_layout = findViewById<RelativeLayout>(R.id.c1_layout)

@@ -40,6 +40,8 @@ class today_fragment : Fragment() {
     }
 
     override fun onResume() {
+        //here i repeat the actions from the onCreate method so that when i change some
+        // settings and come back to this activity it will update all the data displayed
         super.onResume()
 
         get_settings()
@@ -49,6 +51,7 @@ class today_fragment : Fragment() {
 
     fun get_settings()
     {
+        //here i get the current setting from the database
         val database = Database(this.context)
         database.set_default_settings()
         val cursor = database.get_settings()
@@ -66,6 +69,8 @@ class today_fragment : Fragment() {
 
     fun set_variables(root: View)
     {
+        //here i set the display of all views on the screen
+        // that are connected with the settings
         val goal_tv = root.findViewById<TextView>(R.id.goal)
         val str_goal = "of " + goal.toString() + unit + " Goal"
         goal_tv.text = str_goal
@@ -89,6 +94,7 @@ class today_fragment : Fragment() {
 
     fun set_records(root: View)
     {
+        //here i add a new record for the new day if it hasn't already been added
         val calendar = Calendar.getInstance()
         val day_week = calendar.get(Calendar.DAY_OF_WEEK)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -113,6 +119,7 @@ class today_fragment : Fragment() {
     }
 
     fun set_buttons(root: View) {
+        //here i set the actions for the buttons
         val intake_tv = root.findViewById<TextView>(R.id.intake)
         val add_1_tv = root.findViewById<Button>(R.id.add_1)
         val add_2_tv = root.findViewById<Button>(R.id.add_2)
@@ -149,6 +156,8 @@ class today_fragment : Fragment() {
 
 
     fun set_percentage(root: View) {
+        //here i update the percentage, update the database and update the
+        // level of water in the glass when a button is clicked
         val intake_tv = root.findViewById<TextView>(R.id.intake)
         intake_tv.text = current_intake.toString() + unit
 

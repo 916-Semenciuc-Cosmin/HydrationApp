@@ -38,6 +38,7 @@ class history_fragment : Fragment() {
         get_dates()
         set_chart(root)
 
+        //this is for populating the recycler view with the passed days records
         custom_adapter = CustomAdapter(this.context, dates_arr, intakes_arr)
         val recycler1 = root.findViewById<RecyclerView>(R.id.records_view)
         recycler1.adapter = null
@@ -45,6 +46,7 @@ class history_fragment : Fragment() {
         recycler1.adapter = custom_adapter
         recycler1.layoutManager = LinearLayoutManager(this.context)
 
+        //this is for setting the dates under the chart
         val start_date_tv = root.findViewById<TextView>(R.id.start_date)
         val end_date_tv = root.findViewById<TextView>(R.id.end_date)
         start_date_tv.text = start_date
@@ -54,12 +56,17 @@ class history_fragment : Fragment() {
     }
 
     fun get_dates() {
+        //here i get the star and end day of the records
+        //if the database only returns one date this means
+        // in the records there is only one date so the
+        //  start date and end date will be the same
+
         val cursor = database?.get_first_last()
         if (cursor != null) {
             cursor.moveToNext()
-            val str_date = cursor.getString(1).split(":")
-            val day = str_date[1].toInt()
-            val month = str_date[2].toInt() + 1
+            var str_date = cursor.getString(1).split(":")
+            var day = str_date[1].toInt()
+            var month = str_date[2].toInt() + 1
             var str_day = day.toString()
             var str_month = month.toString()
             if (day < 10)
@@ -72,11 +79,11 @@ class history_fragment : Fragment() {
 
             if (cursor.count == 2) {
                 cursor.moveToNext()
-                val str_date = cursor.getString(1).split(":")
-                val day = str_date[1].toInt()
-                val month = str_date[2].toInt() + 1
-                var str_day = day.toString()
-                var str_month = month.toString()
+                str_date = cursor.getString(1).split(":")
+                day = str_date[1].toInt()
+                month = str_date[2].toInt() + 1
+                str_day = day.toString()
+                str_month = month.toString()
                 if (day < 10)
                     str_day = "0" + str_day
                 if (month < 10)
@@ -88,6 +95,7 @@ class history_fragment : Fragment() {
     }
 
     fun set_chart(root: View) {
+        //this part is for introducing the records into the bar chart
         var bar_entries = ArrayList<BarEntry>()
         var bar_data_set: BarDataSet
         var bar_data: BarData? = null
@@ -112,6 +120,7 @@ class history_fragment : Fragment() {
             }
         }
 
+        //if i don't have 30 records stored i fill the bar chart with empty records
         for (index in intakes_arr.size until 30) {
             bar_entries = ArrayList<BarEntry>()
             bar_entries.add(BarEntry(index.toFloat(), 0F))
@@ -121,12 +130,14 @@ class history_fragment : Fragment() {
             bar_data?.addDataSet(bar_data_set)
         }
 
+        //here i style the bars from the chart
         val bar_chart_tv = root.findViewById<BarChart>(R.id.bar_chart)
         bar_data?.barWidth = 0.5F
         bar_chart_tv.data = bar_data
         bar_chart_tv.setDrawBarShadow(true)
         bar_chart_tv.setTouchEnabled(false)
 
+        //here i style the entire chart so that it looks like the one in the example
         val left_axis = bar_chart_tv.axisLeft
         left_axis.textColor = resources.getColor(R.color.white)
         bar_chart_tv.axisRight.isEnabled = false
@@ -136,11 +147,11 @@ class history_fragment : Fragment() {
         bar_chart_tv.axisLeft.axisMaximum = (goal + 200).toFloat()
         bar_chart_tv.axisLeft.axisMinimum = 0F
 
+        //this part is for styling the little squares that are under the bars
         val legend = bar_chart_tv.legend
         legend.xEntrySpace = 0.3F
         legend.xOffset = 2F
         legend.formSize = 6.45F
-        legend.textColor = resources.getColor(R.color.white)
         val legend_entries = legend.entries
         for (entry in legend_entries) {
             entry.formColor = resources.getColor(R.color.gray_2)
@@ -151,6 +162,8 @@ class history_fragment : Fragment() {
     }
 
     override fun onResume() {
+        //here i repeat the action from on create so that when I change
+        // some settings and come back to this activity it will update the screen
         super.onResume()
         database = Database(context)
         dates_arr.clear()
@@ -170,6 +183,7 @@ class history_fragment : Fragment() {
     }
 
     fun store_records() {
+        //here i take the records from the database and store them locally
         var cursor = database?.read_records()
 
         if (cursor != null && cursor.count != 0) {

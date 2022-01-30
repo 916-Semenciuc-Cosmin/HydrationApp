@@ -33,6 +33,7 @@ class CustomAdapter(private val context: Context?,
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         set_goals_units()
+        //here i set the views for every row that will display my records
         val date = get_date(dates_arr[position])
         holder.date_tv.text = date
         holder.intake_tv.text = intakes_arr[position] + " " + units
@@ -51,6 +52,8 @@ class CustomAdapter(private val context: Context?,
 
     fun get_date(str_date: String): String
     {
+        //here i get the date format for my displayed records from the stored date in the database
+        //ex: 2:7:3:2021 -> Monday, 7 April
         val list_date = str_date.split(":")
         val str_day_week = list_date[0]
         val day = list_date[1]
@@ -90,6 +93,7 @@ class CustomAdapter(private val context: Context?,
 
     fun set_goals_units()
     {
+        //here i get from the setting the units type and the current goal
         val database = Database(context)
         val cursor = database.get_settings()
 

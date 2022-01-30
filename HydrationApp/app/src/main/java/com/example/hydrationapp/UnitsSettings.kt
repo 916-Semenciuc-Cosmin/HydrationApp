@@ -27,6 +27,7 @@ class UnitsSettings : AppCompatActivity() {
 
     fun set_actions()
     {
+        //here i set the actions for selecting the unit type
         val database = Database(this)
         val mililiters_l = findViewById<RelativeLayout>(R.id.mililiters_layout)
         val ounces_l = findViewById<RelativeLayout>(R.id.ounces_layout)
@@ -58,6 +59,7 @@ class UnitsSettings : AppCompatActivity() {
 
     fun get_settings()
     {
+        //here i get the current settings
         val database = Database(this)
         database.set_default_settings()
         val cursor = database.get_settings()
@@ -71,6 +73,7 @@ class UnitsSettings : AppCompatActivity() {
 
     fun set_tv()
     {
+        //here i set the display according to the settings
         if (unit == "ml")
         {
             val mililiters_tv = findViewById<TextView>(R.id.mililiters_tv)

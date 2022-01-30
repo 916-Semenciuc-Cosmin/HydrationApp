@@ -41,6 +41,7 @@ class SizeSettings : AppCompatActivity() {
 
     fun set_back()
     {
+        //here i set the back arrow to end this activity
         val back_tv = findViewById<ImageView>(R.id.back)
 
         back_tv.setOnClickListener()
@@ -50,6 +51,7 @@ class SizeSettings : AppCompatActivity() {
     }
 
     fun get_settings() {
+        //here i get the settings from the database
         val database = Database(this)
         database.set_default_settings()
         val cursor = database.get_settings()
@@ -65,6 +67,8 @@ class SizeSettings : AppCompatActivity() {
     }
 
     fun set_text() {
+        //here is where i set the text of the vies on the screen because
+        // i use the same activity for the settings of the goal and for the three containers
         val toolbar_title = findViewById<TextView>(R.id.toolbar_title)
         val description = findViewById<TextView>(R.id.description)
         val units = findViewById<TextView>(R.id.units)
@@ -105,6 +109,7 @@ class SizeSettings : AppCompatActivity() {
 
     fun edit_text()
     {
+        //here i set up the text edit view on the screen
         val edit_text = findViewById<EditText>(R.id.value)
         val cancel_tv = findViewById<TextView>(R.id.cancel)
         val save_tv = findViewById<TextView>(R.id.save)
@@ -125,6 +130,7 @@ class SizeSettings : AppCompatActivity() {
 
     fun set_cancel_save()
     {
+        //here i set the actions of the cancel and save buttons
         val edit_text = findViewById<EditText>(R.id.value)
         val cancel_tv = findViewById<TextView>(R.id.cancel)
         val save_tv = findViewById<TextView>(R.id.save)
@@ -158,6 +164,7 @@ class SizeSettings : AppCompatActivity() {
 
     fun update_database()
     {
+        // here i update the database records if the save button is pushed
         val database = Database(this)
         when {
             type == "goal" -> {

@@ -19,6 +19,9 @@ class Database(context: Context?) :
         private const val DATE = "Date"
         private const val INTAKE = "Intake"
 
+        //I know the settings should have been implemented with a settings activity and a
+        // preference xml file but that caused me a lot of problems when i tried it
+        // and this way it was easier for me
         private const val SETTINGS = "Settings"
         private const val S_ID = "Id"
         private const val UNITS = "Units"
@@ -53,6 +56,7 @@ class Database(context: Context?) :
     }
 
     fun set_default_settings() {
+        //here is where i set the default setting at the first start of the app
         val cursor = get_settings()
         if (cursor != null && cursor.count == 0) {
             val database = writableDatabase
@@ -71,6 +75,7 @@ class Database(context: Context?) :
 
     fun set_count()
     {
+        //here is where i get the number of records in the table
         val database = readableDatabase
         val query = "SELECT COUNT($ID) FROM $RECORDS"
         val cursor = database.rawQuery(query, null)
@@ -79,6 +84,7 @@ class Database(context: Context?) :
     }
 
     fun get_settings(): Cursor {
+        //here is where i return the settings from the table
         val id = 0
         val select = "SELECT * FROM $SETTINGS WHERE $S_ID = $id "
         val database = this.readableDatabase
@@ -91,6 +97,7 @@ class Database(context: Context?) :
     }
 
     fun set_units(units: String) {
+        //here is where i set only the units from the settings
         val database = this.writableDatabase
         val query = "UPDATE " + SETTINGS + " SET " + UNITS + " = " + "'" + units + "'" + " WHERE " +
                 S_ID + " = " + "0"
@@ -98,6 +105,7 @@ class Database(context: Context?) :
     }
 
     fun set_goal(goal: Int) {
+        //here is where i set only the goal from the settings
         val database = this.writableDatabase
         val query = "UPDATE " + SETTINGS + " SET " + GOAL + " = " + goal + " WHERE " +
                 S_ID + " = " + "0"
@@ -105,6 +113,7 @@ class Database(context: Context?) :
     }
 
     fun set_c1_size(size: Int) {
+        //here is where i set only the first container size from the settings
         val database = this.writableDatabase
         val query = "UPDATE " + SETTINGS + " SET " + C1 + " = " + size + " WHERE " +
                 S_ID + " = " + "0"
@@ -112,6 +121,7 @@ class Database(context: Context?) :
     }
 
     fun set_c2_size(size: Int) {
+        //here is where i set only the second container size from the settings
         val database = this.writableDatabase
         val query = "UPDATE " + SETTINGS + " SET " + C2 + " = " + size + " WHERE " +
                 S_ID + " = " + "0"
@@ -119,6 +129,7 @@ class Database(context: Context?) :
     }
 
     fun set_c3_size(size: Int) {
+        //here is where i set only the third container size from the settings
         val database = this.writableDatabase
         val query = "UPDATE " + SETTINGS + " SET " + C3 + " = " + size + " WHERE " +
                 S_ID + " = " + "0"
@@ -126,6 +137,9 @@ class Database(context: Context?) :
     }
 
     fun add_record(context: Context, date: String, intake: Int) {
+        //here is where i add a new record
+        //if i already have the maximum number of records (30) i remove the first one
+        // and decrement all the other record id's to make room for the new one
         set_count()
         val database = this.writableDatabase
         val content_values = ContentValues()
@@ -146,6 +160,7 @@ class Database(context: Context?) :
     }
 
     fun get_first_last(): Cursor {
+        //here i return the date of the first and the last record(if there are more than one)
         set_count()
         val select = "SELECT * FROM $RECORDS WHERE $ID = 1 or $ID = $count"
         val database = this.readableDatabase
@@ -158,6 +173,7 @@ class Database(context: Context?) :
     }
 
     fun update_record(context: Context, date: String, intake: Int) {
+        //here i update the intake of the current day
         val database = this.writableDatabase
         val query = "UPDATE " + RECORDS + " SET " + INTAKE + " = " + intake.toString() + " WHERE " +
                 DATE + " = " + "'" + date + "'"
@@ -165,6 +181,7 @@ class Database(context: Context?) :
     }
 
     fun read_record(date: String): Cursor {
+        //here is return the current day's record
         val str_date = "'$date'"
         val select = "SELECT * FROM $RECORDS WHERE $DATE = $str_date"
         val database = this.readableDatabase
@@ -177,6 +194,7 @@ class Database(context: Context?) :
     }
 
     fun read_records(): Cursor {
+        //here i return all the records
         val select = "SELECT * FROM $RECORDS"
         val database = this.readableDatabase
         lateinit var cursor: Cursor
