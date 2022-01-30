@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/today_fragment">
+    <fragment
+        android:id="@+id/today_fragment"
+        android:name="com.example.hydrationapp.today_fragment"
+        android:label="\t\t\t\t\t\t\t\t\t\t\t\t\t\tToday's Progress"
+        tools:layout="@layout/fragment_today" />
+    <fragment
+        android:id="@+id/history_fragment"
+        android:name="com.example.hydrationapp.history_fragment"
+        android:label="\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHistory"
+        tools:layout="@layout/fragment_history" />
+</navigation>

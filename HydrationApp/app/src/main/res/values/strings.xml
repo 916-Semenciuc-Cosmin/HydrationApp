@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">HydrationApp</string>
+
+<!-- Today page related strings-->
+    <string name="today_title">Today</string>
+    <string name="todays_progress">Today\'s Progress</string>
+    <string name="percentage">0%</string>
+    <string name="goal">of 2000 ml Goal</string>
+    <string name="intake">0 ml</string>
+    <string name="add_1">200 ml</string>
+    <string name="add_2">400 ml</string>
+    <string name="add_3">500 ml</string>
+    <string name="welcome">Happy you\'re back to track your healthy\n\t\t\t\t\t\thabit of staying hydrated.</string>
+    <string name="title_activity_settings">Settings</string>
+
+<!-- History page related strings-->
+    <string name="history_title">History</string>
+    <string name="settings_title">Settings</string>
+    <string name="history_text">Here you can  see your hydration data \n\t\t\t\t\t\t\t\t\t for the
+     last 30 days</string>
+
+<!-- Main settings page related strings-->
+    <string name="containers_title">Containers</string>
+    <string name="units">Units</string>
+    <string name="daily_goal">Daily Goal</string>
+    <string name="settings_message">These containers will appear on your screen so you can easily
+        tap on them and track your intake.</string>
+    <string name="container_1">Container 1</string>
+    <string name="container_2">Container 2</string>
+    <string name="container_3">Container 3</string>
+    <string name="unit"> ml</string>
+    <string name="goal_value">2000</string>
+    <string name="c1_value">200</string>
+    <string name="c2_value">400</string>
+    <string name="c3_value">500</string>
+    <string name="mililiters">mililiters</string>
+    <string name="ounces">ounces (oz)</string>
+
+<!-- Secondary settings page related strings-->
+    <string name="goal_settings_text">Here you can set your hydration goal \n\t\t based on your
+        preferred unit of \n\t\t\t\t\t\t\t\t\t\t measurement</string>
+    <string name="container_setting_text">Here you can specify your container size \n\t so it
+        would be easier to enter your daily \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t liquid intake</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="title_activity_units_settings">UnitsSettings</string>
+    <string name="title_activity_sizes_settings">SizesSettings</string>
+</resources>
